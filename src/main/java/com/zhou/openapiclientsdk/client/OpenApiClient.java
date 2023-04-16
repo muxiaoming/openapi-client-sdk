@@ -18,6 +18,8 @@ import java.util.Map;
  */
 public class OpenApiClient {
 
+    public static final String GATEWAY_HOST = "http://localhost:8090";
+
     /**
      * accessKey
      */
@@ -41,7 +43,7 @@ public class OpenApiClient {
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("name", name);
 
-        String result = HttpUtil.get("http://localhost:8123/api/name/", paramMap);
+        String result = HttpUtil.get(GATEWAY_HOST + "/api/name/", paramMap);
         System.out.println("result = " + result);
         return result;
     }
@@ -50,7 +52,7 @@ public class OpenApiClient {
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("name", name);
 
-        String result = HttpUtil.post("http://localhost:8123/api/name/", paramMap);
+        String result = HttpUtil.post(GATEWAY_HOST + "/api/name/", paramMap);
         System.out.println("result = " + result);
         return result;
     }
@@ -81,7 +83,7 @@ public class OpenApiClient {
 
     public String getUsernameByPost(User user) {
         String json = JSONUtil.toJsonStr(user);
-        HttpResponse execute = HttpRequest.post("http://localhost:8123/api/name/user")
+        HttpResponse execute = HttpRequest.post(GATEWAY_HOST + "/api/name/user")
                 .body(json)
                 .addHeaders(getHeaderMap(json))
                 .execute();
